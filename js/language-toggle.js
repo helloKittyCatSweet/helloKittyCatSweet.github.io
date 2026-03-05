@@ -30,6 +30,32 @@
     return SUPPORTED.indexOf(lang) !== -1 ? lang : detectDefaultLanguage();
   }
 
+  function syncTocWithLanguage(current) {
+    var tocLinks = document.querySelectorAll("#toc-body a[href^='#']");
+    if (!tocLinks.length) {
+      return;
+    }
+
+    for (var i = 0; i < tocLinks.length; i++) {
+      var link = tocLinks[i];
+      var targetId = decodeURIComponent((link.getAttribute("href") || "").slice(1));
+      var heading = targetId ? document.getElementById(targetId) : null;
+      var item = link.closest(".toc-list-item") || link.parentElement;
+      if (!item) {
+        continue;
+      }
+
+      var block = heading ? heading.closest("[data-lang]") : null;
+      if (!block) {
+        item.style.display = "";
+        continue;
+      }
+
+      var blockLang = block.getAttribute("data-lang");
+      item.style.display = blockLang === current ? "" : "none";
+    }
+  }
+
   function applyLanguage(lang) {
     var current = normalizeLanguage(lang);
     document.documentElement.setAttribute("data-site-lang", current);
@@ -37,7 +63,7 @@
 
     var label = document.getElementById("language-toggle-label");
     if (label) {
-      label.textContent = current === "zh" ? "EN" : "中";
+      label.textContent = current === "zh" ? "中" : "EN";
     }
 
     var toggle = document.querySelector("[data-language-toggle]");
@@ -48,6 +74,11 @@
     }
 
     setStoredLanguage(current);
+
+    // tocbot renders both language headings; hide the inactive language entries.
+    setTimeout(function () {
+      syncTocWithLanguage(current);
+    }, 0);
   }
 
   function toggleLanguage() {
