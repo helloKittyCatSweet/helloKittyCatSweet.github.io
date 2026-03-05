@@ -1,0 +1,22 @@
+[data-lang] {
+  display: block;
+}
+
+html[data-site-lang="zh"] [data-lang="en"] {
+  display: none !important;
+}
+
+html[data-site-lang="en"] [data-lang="zh"] {
+  display: none !important;
+}
+
+#language-toggle-btn .nav-link {
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+#language-toggle-label {
+  display: inline-block;
+  min-width: 2.2em;
+  text-align: center;
+}

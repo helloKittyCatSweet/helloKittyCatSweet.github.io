@@ -1,0 +1,912 @@
+
+
+<!DOCTYPE html>
+<html lang="en" data-default-color-scheme=auto>
+
+
+
+<head>
+  <meta charset="UTF-8">
+
+  <link rel="apple-touch-icon" sizes="76x76" href="/img/avatar.png">
+  <link rel="icon" href="/img/avatar.png">
+  
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, shrink-to-fit=no">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  
+  <meta name="theme-color" content="#2f4154">
+  <meta name="author" content="Hello Kitty">
+  <meta name="keywords" content="">
+  
+    <meta name="description" content="OpenClaw Community Meetup NotesI attended an OpenClaw offline meetup yesterday and learned a lot about the project’s latest progress, practical deployment experience, and LLM security risks. Here ar">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OpenClaw Meetup: AI Agent Engineering and Security Insights">
+<meta property="og:url" content="http://example.com/2026/03/05/openclaw-meetup/index.html">
+<meta property="og:site_name" content="Hello Kitty">
+<meta property="og:description" content="OpenClaw Community Meetup NotesI attended an OpenClaw offline meetup yesterday and learned a lot about the project’s latest progress, practical deployment experience, and LLM security risks. Here ar">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/img/meetup/openclaw/meeting_place.jpg">
+<meta property="og:image" content="http://example.com/img/meetup/openclaw/lobster.jpg">
+<meta property="og:image" content="http://example.com/img/meetup/openclaw/meeting_place.jpg">
+<meta property="og:image" content="http://example.com/img/meetup/openclaw/lobster.jpg">
+<meta property="article:published_time" content="2026-03-05T06:30:00.000Z">
+<meta property="article:modified_time" content="2026-03-05T08:03:16.014Z">
+<meta property="article:author" content="Hello Kitty">
+<meta property="article:tag" content="OpenClaw">
+<meta property="article:tag" content="AI">
+<meta property="article:tag" content="Security">
+<meta property="article:tag" content="LLM">
+<meta property="article:tag" content="Tooling">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="http://example.com/img/meetup/openclaw/meeting_place.jpg">
+  
+  
+  
+  <title>OpenClaw Meetup: AI Agent Engineering and Security Insights - Hello Kitty</title>
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/twitter-bootstrap/4.6.1/css/bootstrap.min.css" />
+
+
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/github-markdown-css/4.0.0/github-markdown.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/hint.css/2.7.0/hint.min.css" />
+
+  <link  rel="stylesheet" href="https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.css" />
+
+
+
+<!-- 主题依赖的图标库，不要自行修改 -->
+<!-- Do not modify the link that theme dependent icons -->
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1749284_5i9bdhy70f8.css">
+
+
+
+<link rel="stylesheet" href="//at.alicdn.com/t/c/font_1736178_k526ubmyhba.css">
+
+
+<link  rel="stylesheet" href="/css/main.css" />
+
+
+  <link id="highlight-css" rel="stylesheet" href="/css/highlight.css" />
+  
+    <link id="highlight-css-dark" rel="stylesheet" href="/css/highlight-dark.css" />
+  
+
+
+
+  
+<link rel="stylesheet" href="/css/language-toggle.css">
+
+
+
+  <script id="fluid-configs">
+    var Fluid = window.Fluid || {};
+    Fluid.ctx = Object.assign({}, Fluid.ctx)
+    var CONFIG = {"hostname":"example.com","root":"/","version":"1.9.8","typing":{"enable":true,"typeSpeed":70,"cursorChar":"_","loop":false,"scope":[]},"anchorjs":{"enable":true,"element":"h1,h2,h3,h4,h5,h6","placement":"left","visible":"hover","icon":""},"progressbar":{"enable":true,"height_px":3,"color":"#29d","options":{"showSpinner":false,"trickleSpeed":100}},"code_language":{"enable":true,"default":"TEXT"},"copy_btn":true,"image_caption":{"enable":true},"image_zoom":{"enable":true,"img_url_replace":["",""]},"toc":{"enable":true,"placement":"right","headingSelector":"h1,h2,h3,h4,h5,h6","collapseDepth":0},"lazyload":{"enable":true,"loading_img":"/img/loading.gif","onlypost":false,"offset_factor":2},"web_analytics":{"enable":true,"follow_dnt":true,"baidu":null,"google":{"measurement_id":null},"tencent":{"sid":null,"cid":null},"leancloud":{"app_id":"Uq6FEWwkwAjX5R4wTRMaHYmg-gzGzoHsz","app_key":"ptgcasuZxP7I31kalGtaEylb","server_url":null,"path":"window.location.pathname","ignore_local":false},"umami":{"src":null,"website_id":null,"domains":null,"start_time":"2024-01-01T00:00:00.000Z","token":null,"api_server":null}},"search_path":"/local-search.xml","include_content_in_search":true};
+
+    if (CONFIG.web_analytics.follow_dnt) {
+      var dntVal = navigator.doNotTrack || window.doNotTrack || navigator.msDoNotTrack;
+      Fluid.ctx.dnt = dntVal && (dntVal.startsWith('1') || dntVal.startsWith('yes') || dntVal.startsWith('on'));
+    }
+  </script>
+  <script  src="/js/utils.js" ></script>
+  <script  src="/js/color-schema.js" ></script>
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+  
+
+
+
+  
+<meta name="generator" content="Hexo 7.3.0"></head>
+
+
+<body>
+  
+
+  <header>
+    
+
+<div class="header-inner" style="height: 70vh;">
+  <nav id="navbar" class="navbar fixed-top  navbar-expand-lg navbar-dark scrolling-navbar">
+  <div class="container">
+    <a class="navbar-brand" href="/">
+      <strong>Hello Kitty</strong>
+    </a>
+
+    <button id="navbar-toggler-btn" class="navbar-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <div class="animated-icon"><span></span><span></span><span></span></div>
+    </button>
+
+    <!-- Collapsible content -->
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto text-center">
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/" target="_self">
+                <i class="iconfont icon-home-fill"></i>
+                <span>Home</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/archives/" target="_self">
+                <i class="iconfont icon-archive-fill"></i>
+                <span>Archives</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/categories/" target="_self">
+                <i class="iconfont icon-category-fill"></i>
+                <span>Categories</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/tags/" target="_self">
+                <i class="iconfont icon-tags-fill"></i>
+                <span>Tags</span>
+              </a>
+            </li>
+          
+        
+          
+          
+          
+          
+            <li class="nav-item">
+              <a class="nav-link" href="/about/" target="_self">
+                <i class="iconfont icon-user-fill"></i>
+                <span>About</span>
+              </a>
+            </li>
+          
+        
+        
+          <li class="nav-item" id="search-btn">
+            <a class="nav-link" target="_self" href="javascript:;" data-toggle="modal" data-target="#modalSearch" aria-label="Search">
+              <i class="iconfont icon-search"></i>
+            </a>
+          </li>
+          
+        
+        <li class="nav-item" id="language-toggle-btn">
+          <a class="nav-link" target="_self" href="javascript:;" aria-label="Language Toggle" data-language-toggle>
+            <span id="language-toggle-label">EN</span>
+          </a>
+        </li>
+        
+          <li class="nav-item" id="color-toggle-btn">
+            <a class="nav-link" target="_self" href="javascript:;" aria-label="Color Toggle">
+              <i class="iconfont icon-dark" id="color-toggle-icon"></i>
+            </a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+</nav>
+
+  
+
+<div id="banner" class="banner" parallax=true
+     style="background: url('/img/default.png') no-repeat center center; background-size: cover;">
+  <div class="full-bg-img">
+    <div class="mask flex-center" style="background-color: rgba(0, 0, 0, 0.3)">
+      <div class="banner-text text-center fade-in-up">
+        <div class="h2">
+          
+            <span id="subtitle" data-typed-text="OpenClaw Meetup: AI Agent Engineering and Security Insights"></span>
+          
+        </div>
+
+        
+          
+  <div class="mt-3">
+    
+    
+      <span class="post-meta">
+        <i class="iconfont icon-date-fill" aria-hidden="true"></i>
+        <time datetime="2026-03-05 14:30" pubdate>
+          March 5, 2026 pm
+        </time>
+      </span>
+    
+  </div>
+
+  <div class="mt-1">
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-chart"></i>
+        
+          758 words
+        
+      </span>
+    
+
+    
+      <span class="post-meta mr-2">
+        <i class="iconfont icon-clock-fill"></i>
+        
+        
+        
+          7 mins
+        
+      </span>
+    
+
+    
+    
+      
+        <span id="leancloud-page-views-container" class="post-meta" style="display: none">
+          <i class="iconfont icon-eye" aria-hidden="true"></i>
+          <span id="leancloud-page-views"></span>次
+        </span>
+        
+      
+      
+    
+  </div>
+
+
+        
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
+</div>
+
+  </header>
+
+  <main>
+    
+      
+
+<div class="container-fluid nopadding-x">
+  <div class="row nomargin-x">
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+
+    </div>
+
+    <div class="col-lg-8 nopadding-x-md">
+      <div class="container nopadding-x-md" id="board-ctn">
+        <div id="board">
+          <article class="post-content mx-auto">
+            <h1 id="seo-header">OpenClaw Meetup: AI Agent Engineering and Security Insights</h1>
+            
+            
+              <div class="markdown-body">
+                
+                <div data-lang="en">
+
+<h2 id="OpenClaw-Community-Meetup-Notes"><a href="#OpenClaw-Community-Meetup-Notes" class="headerlink" title="OpenClaw Community Meetup Notes"></a>OpenClaw Community Meetup Notes</h2><p>I attended an OpenClaw offline meetup yesterday and learned a lot about the project’s latest progress, practical deployment experience, and LLM security risks. Here are the highlights.</p>
+<p><img src="/../img/meetup/openclaw/meeting_place.jpg" srcset="/img/loading.gif" lazyload alt="Meetup Venue"></p>
+<hr>
+<h2 id="1-OpenClaw-Customization-Identity-Soul-and-Scheduled-Tasks"><a href="#1-OpenClaw-Customization-Identity-Soul-and-Scheduled-Tasks" class="headerlink" title="1. OpenClaw Customization: Identity, Soul, and Scheduled Tasks"></a>1. OpenClaw Customization: Identity, Soul, and Scheduled Tasks</h2><p>OpenClaw offers highly flexible customization for AI agents. You can define:</p>
+<ul>
+<li><strong>Identity</strong> for role and persona consistency</li>
+<li><strong>Soul</strong> for style and behavioral tone</li>
+<li><strong>Scheduled tasks</strong> for proactive execution</li>
+</ul>
+<p>This allows agents to move beyond simple request-response patterns and become long-running assistants with stable personality and behavior.</p>
+<p><strong>Reference:</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/yaksheng/openclaw-meetup-2-slides">OpenClaw Meetup 2 Slides</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/yaksheng/openclaw-meetup-slides">OpenClaw Meetup Slides</a></li>
+</ul>
+<hr>
+<h2 id="2-Agora’s-Voice-Interaction-Integration"><a href="#2-Agora’s-Voice-Interaction-Integration" class="headerlink" title="2. Agora’s Voice Interaction Integration"></a>2. Agora’s Voice Interaction Integration</h2><p>A conventional voice AI pipeline usually goes through three steps:</p>
+<ol>
+<li><strong>ASR</strong> (speech to text)</li>
+<li><strong>LLM</strong> (text to text)</li>
+<li><strong>TTS</strong> (text to speech)</li>
+</ol>
+<p>Agora presented a more integrated approach by encapsulating most interaction interfaces and using OpenClaw APIs under the hood. This significantly reduces engineering overhead and improves end-user conversation flow.</p>
+<p><img src="/../img/meetup/openclaw/lobster.jpg" srcset="/img/loading.gif" lazyload alt="Meetup Snapshot"></p>
+<hr>
+<h2 id="3-Deployment-Security-Default-Settings-Are-Not-Safe"><a href="#3-Deployment-Security-Default-Settings-Are-Not-Safe" class="headerlink" title="3. Deployment Security: Default Settings Are Not Safe"></a>3. Deployment Security: Default Settings Are Not Safe</h2><p>One key warning from the meetup: default deployment settings are often unsafe. Automated bots can scan exposed services quickly, and serious incidents may happen within minutes, such as:</p>
+<ul>
+<li>Unauthorized database access</li>
+<li>Sensitive data leakage</li>
+<li>Host compromise</li>
+</ul>
+<p>Recommended hardening actions:</p>
+<ol>
+<li>Use SSH key authentication</li>
+<li>Configure firewall policies strictly</li>
+<li>Keep system and dependencies updated</li>
+<li>Enable Fail2ban to block brute-force attempts</li>
+<li>Isolate workloads with Docker</li>
+</ol>
+<p><strong>Reference:</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kenken64/clawmacdo">ClawMacdo Deployment Security Toolkit</a></li>
+</ul>
+<hr>
+<h2 id="4-OWASP-LLM-Top-10-and-Prompt-Injection"><a href="#4-OWASP-LLM-Top-10-and-Prompt-Injection" class="headerlink" title="4. OWASP LLM Top 10 and Prompt Injection"></a>4. OWASP LLM Top 10 and Prompt Injection</h2><p>OWASP’s LLM Top 10 risks discussed at the meetup:</p>
+<ol>
+<li>Prompt Injection</li>
+<li>Sensitive Information Disclosure</li>
+<li>Supply Chain Vulnerabilities</li>
+<li>Data and Model Poisoning</li>
+<li>Improper Output Handling</li>
+<li>Excessive Agency</li>
+<li>System Prompt Leakage</li>
+<li>Vector and Embedding Weaknesses</li>
+<li>Misinformation</li>
+<li>Unbounded Consumption</li>
+</ol>
+<p>The highest-priority risk is <strong>Prompt Injection</strong>. Even when a model is instructed not to reveal secrets, attackers may still extract data through indirect and incremental prompts.</p>
+<p>To reduce this risk, guardrail tools can provide policy checks, threat filters, and sensitive-output protection.</p>
+<p><strong>Reference:</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@safefence/openclaw-guardrails">SafeFence OpenClaw Guardrails</a></li>
+</ul>
+<hr>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>This meetup made one thing clear: capability growth and security discipline must go together in AI agent systems.</p>
+<ul>
+<li>OpenClaw enables strong customization and extensibility</li>
+<li>Integrated voice stacks can improve product experience significantly</li>
+<li>Security hardening is mandatory, not optional</li>
+<li>Prompt injection defense should be treated as a first-class requirement</li>
+</ul>
+<hr>
+<p><em>“Security is not a feature, it is a continuous practice.”</em></p>
+</div>
+
+<div data-lang="zh">
+
+<h2 id="OpenClaw-线下见面会记录"><a href="#OpenClaw-线下见面会记录" class="headerlink" title="OpenClaw 线下见面会记录"></a>OpenClaw 线下见面会记录</h2><p>昨天参加了 OpenClaw 的线下见面会，收获很大。现场讨论了项目近期进展、工程落地方式，以及大模型安全风险。以下是我整理的核心内容。</p>
+<p><img src="/../img/meetup/openclaw/meeting_place.jpg" srcset="/img/loading.gif" lazyload alt="会议现场"></p>
+<hr>
+<h2 id="1-OpenClaw-的定制能力：Identity、Soul-与定时任务"><a href="#1-OpenClaw-的定制能力：Identity、Soul-与定时任务" class="headerlink" title="1. OpenClaw 的定制能力：Identity、Soul 与定时任务"></a>1. OpenClaw 的定制能力：Identity、Soul 与定时任务</h2><p>OpenClaw 提供了很强的智能体定制能力，可以定义：</p>
+<ul>
+<li><strong>Identity（身份）</strong>：保证角色一致性</li>
+<li><strong>Soul（风格）</strong>：塑造表达方式与行为倾向</li>
+<li><strong>定时任务</strong>：让智能体具备主动执行能力</li>
+</ul>
+<p>这意味着智能体不再只是被动问答工具，而是可以长期运行、具备稳定人格和行为逻辑的助手。</p>
+<p><strong>参考资料：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/yaksheng/openclaw-meetup-2-slides">OpenClaw Meetup 2 Slides</a></li>
+<li><a target="_blank" rel="noopener" href="https://github.com/yaksheng/openclaw-meetup-slides">OpenClaw Meetup Slides</a></li>
+</ul>
+<hr>
+<h2 id="2-Agora-的语音交互整合方案"><a href="#2-Agora-的语音交互整合方案" class="headerlink" title="2. Agora 的语音交互整合方案"></a>2. Agora 的语音交互整合方案</h2><p>传统语音 AI 流程通常要经过三步：</p>
+<ol>
+<li><strong>ASR</strong>：语音转文字</li>
+<li><strong>LLM</strong>：文字理解与生成</li>
+<li><strong>TTS</strong>：文字转语音</li>
+</ol>
+<p>Agora 在分享中展示了更一体化的方案：将大部分接口能力封装在平台层，并在底层调用 OpenClaw 接口。这样可以明显降低开发复杂度，也能提升最终对话体验。</p>
+<p><img src="/../img/meetup/openclaw/lobster.jpg" srcset="/img/loading.gif" lazyload alt="会议相关"></p>
+<hr>
+<h2 id="3-部署安全：默认配置并不安全"><a href="#3-部署安全：默认配置并不安全" class="headerlink" title="3. 部署安全：默认配置并不安全"></a>3. 部署安全：默认配置并不安全</h2><p>现场反复强调的一点是：默认部署配置往往不安全。暴露服务后，自动化 bot 会快速扫描，几分钟内就可能出现严重后果，例如：</p>
+<ul>
+<li>数据库被未授权访问</li>
+<li>敏感信息泄露</li>
+<li>主机被入侵</li>
+</ul>
+<p>建议的加固措施包括：</p>
+<ol>
+<li>使用 SSH Key 认证</li>
+<li>严格配置防火墙策略</li>
+<li>及时更新系统与依赖</li>
+<li>启用 Fail2ban 防暴力破解</li>
+<li>使用 Docker 进行服务隔离</li>
+</ol>
+<p><strong>参考资料：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://github.com/kenken64/clawmacdo">ClawMacdo 部署安全工具</a></li>
+</ul>
+<hr>
+<h2 id="4-OWASP-LLM-Top-10-与-Prompt-Injection"><a href="#4-OWASP-LLM-Top-10-与-Prompt-Injection" class="headerlink" title="4. OWASP LLM Top 10 与 Prompt Injection"></a>4. OWASP LLM Top 10 与 Prompt Injection</h2><p>见面会讨论了 OWASP 的 LLM Top 10 风险：</p>
+<ol>
+<li>Prompt Injection（提示词注入）</li>
+<li>Sensitive Information Disclosure（敏感信息泄露）</li>
+<li>Supply Chain Vulnerabilities（供应链漏洞）</li>
+<li>Data and Model Poisoning（数据与模型投毒）</li>
+<li>Improper Output Handling（不当输出处理）</li>
+<li>Excessive Agency（代理权限过高）</li>
+<li>System Prompt Leakage（系统提示词泄露）</li>
+<li>Vector and Embedding Weaknesses（向量与嵌入弱点）</li>
+<li>Misinformation（错误信息）</li>
+<li>Unbounded Consumption（资源无限制消耗）</li>
+</ol>
+<p>其中优先级最高的是 <strong>Prompt Injection</strong>。即便模型被指示“不要泄露敏感信息”，攻击者依然可以通过间接、拆分、递进式提问来套取信息。</p>
+<p>要降低这类风险，建议引入 guardrails 工具，对输入输出做策略校验、风险过滤和敏感信息保护。</p>
+<p><strong>参考资料：</strong></p>
+<ul>
+<li><a target="_blank" rel="noopener" href="https://www.npmjs.com/package/@safefence/openclaw-guardrails">SafeFence OpenClaw Guardrails</a></li>
+</ul>
+<hr>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>这次分享让我更明确一件事：AI 智能体系统的发展，必须把能力建设和安全治理放在同等优先级。</p>
+<ul>
+<li>OpenClaw 的可定制性和扩展性很强</li>
+<li>一体化语音方案能显著提升产品体验</li>
+<li>部署加固是刚需，不是可选项</li>
+<li>Prompt Injection 防御应作为一等工程问题</li>
+</ul>
+<hr>
+<p><em>“安全不是一个功能点，而是持续的工程实践。”</em></p>
+</div>
+
+                
+              </div>
+            
+            <hr/>
+            <div>
+              <div class="post-metas my-3">
+  
+    <div class="post-meta mr-3 d-flex align-items-center">
+      <i class="iconfont icon-category"></i>
+      
+
+<span class="category-chains">
+  
+  
+    
+      <span class="category-chain">
+        
+  <a href="/categories/Learning-Notes/" class="category-chain-item">Learning Notes</a>
+  
+  
+    <span>></span>
+    
+  <a href="/categories/Learning-Notes/Tech-Sharing/" class="category-chain-item">Tech Sharing</a>
+  
+  
+
+  
+
+      </span>
+    
+  
+</span>
+
+    </div>
+  
+  
+    <div class="post-meta">
+      <i class="iconfont icon-tags"></i>
+      
+        <a href="/tags/OpenClaw/" class="print-no-link">#OpenClaw</a>
+      
+        <a href="/tags/AI/" class="print-no-link">#AI</a>
+      
+        <a href="/tags/Security/" class="print-no-link">#Security</a>
+      
+        <a href="/tags/LLM/" class="print-no-link">#LLM</a>
+      
+        <a href="/tags/Tooling/" class="print-no-link">#Tooling</a>
+      
+    </div>
+  
+</div>
+
+
+              
+  
+
+  <div class="license-box my-3">
+    <div class="license-title">
+      <div>OpenClaw Meetup: AI Agent Engineering and Security Insights</div>
+      <div>http://example.com/2026/03/05/openclaw-meetup/</div>
+    </div>
+    <div class="license-meta">
+      
+        <div class="license-meta-item">
+          <div>Author</div>
+          <div>Hello Kitty</div>
+        </div>
+      
+      
+        <div class="license-meta-item license-meta-date">
+          <div>Posted on</div>
+          <div>March 5, 2026</div>
+        </div>
+      
+      
+      
+        <div class="license-meta-item">
+          <div>Licensed under</div>
+          <div>
+            
+              
+              
+                <a class="print-no-link" target="_blank" href="https://creativecommons.org/licenses/by/4.0/">
+                  <span class="hint--top hint--rounded" aria-label="BY - Attribution">
+                    <i class="iconfont icon-cc-by"></i>
+                  </span>
+                </a>
+              
+            
+          </div>
+        </div>
+      
+    </div>
+    <div class="license-icon iconfont"></div>
+  </div>
+
+
+
+              
+                <div class="post-prevnext my-3">
+                  <article class="post-prev col-6">
+                    
+                    
+                  </article>
+                  <article class="post-next col-6">
+                    
+                    
+                      <a href="/2026/03/01/mistral-ai-hackathon-experience/" title="My Journey at Mistral AI Hackathon - BeWithMe Project">
+                        <span class="hidden-mobile">My Journey at Mistral AI Hackathon - BeWithMe Project</span>
+                        <span class="visible-mobile">Next</span>
+                        <i class="iconfont icon-arrowright"></i>
+                      </a>
+                    
+                  </article>
+                </div>
+              
+            </div>
+
+            
+  
+  
+    <article id="comments" lazyload>
+      
+  <div id="valine"></div>
+  <script type="text/javascript">
+    Fluid.utils.loadComments('#valine', function() {
+      Fluid.utils.createScript('https://lib.baomitu.com/valine/1.5.1/Valine.min.js', function() {
+        var options = Object.assign(
+          {"appId":"Uq6FEWwkwAjX5R4wTRMaHYmg-gzGzoHsz","appKey":"ptgcasuZxP7I31kalGtaEylb","path":"window.location.pathname","placeholder":null,"avatar":"retro","meta":["nick","mail","link"],"requiredFields":[],"pageSize":10,"lang":"zh-CN","highlight":false,"recordIP":false,"serverURLs":"","emojiCDN":null,"emojiMaps":null,"enableQQ":false},
+          {
+            el: "#valine",
+            path: window.location.pathname
+          }
+        )
+        new Valine(options);
+        Fluid.utils.waitElementVisible('#valine .vcontent', () => {
+          var imgSelector = '#valine .vcontent img:not(.vemoji)';
+          Fluid.plugins.imageCaption(imgSelector);
+          Fluid.plugins.fancyBox(imgSelector);
+        })
+      });
+    });
+  </script>
+  <noscript>Please enable JavaScript to view the comments</noscript>
+
+
+    </article>
+  
+
+
+          </article>
+        </div>
+      </div>
+    </div>
+
+    <div class="side-col d-none d-lg-block col-lg-2">
+      
+  <aside class="sidebar" style="margin-left: -1rem">
+    <div id="toc">
+  <p class="toc-header">
+    <i class="iconfont icon-list"></i>
+    <span>Table of Contents</span>
+  </p>
+  <div class="toc-body" id="toc-body"></div>
+</div>
+
+
+
+  </aside>
+
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+  
+
+
+
+
+
+
+
+    
+
+    
+      <a id="scroll-top-button" aria-label="TOP" href="#" role="button">
+        <i class="iconfont icon-arrowup" aria-hidden="true"></i>
+      </a>
+    
+
+    
+      <div class="modal fade" id="modalSearch" tabindex="-1" role="dialog" aria-labelledby="ModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Search</h4>
+        <button type="button" id="local-search-close" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <input type="text" id="local-search-input" class="form-control validate">
+          <label data-error="x" data-success="v" for="local-search-input">Keyword</label>
+        </div>
+        <div class="list-group" id="local-search-result"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+    
+
+    
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+  
+    <div class="footer-content">
+       <a href="https://hexo.io" target="_blank" rel="nofollow noopener"><span>Hexo</span></a> <i class="iconfont icon-love"></i> <a href="https://github.com/fluid-dev/hexo-theme-fluid" target="_blank" rel="nofollow noopener"><span>Fluid</span></a> 
+    </div>
+  
+  
+    <div class="statistics">
+  
+  
+
+  
+    
+      <span id="leancloud-site-pv-container" style="display: none">
+        总访问量
+        <span id="leancloud-site-pv"></span>
+        次
+      </span>
+    
+    
+      <span id="leancloud-site-uv-container" style="display: none">
+        总访客数
+        <span id="leancloud-site-uv"></span>
+        人
+      </span>
+    
+    
+
+  
+
+</div>
+
+  
+  
+</div>
+
+  </footer>
+
+  <!-- Scripts -->
+  
+  <script  src="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.js" ></script>
+  <link  rel="stylesheet" href="https://lib.baomitu.com/nprogress/0.2.0/nprogress.min.css" />
+
+  <script>
+    NProgress.configure({"showSpinner":false,"trickleSpeed":100})
+    NProgress.start()
+    window.addEventListener('load', function() {
+      NProgress.done();
+    })
+  </script>
+
+
+<script  src="https://lib.baomitu.com/jquery/3.6.4/jquery.min.js" ></script>
+<script  src="https://lib.baomitu.com/twitter-bootstrap/4.6.1/js/bootstrap.min.js" ></script>
+<script  src="/js/events.js" ></script>
+<script  src="/js/plugins.js" ></script>
+
+
+  <script  src="https://lib.baomitu.com/typed.js/2.0.12/typed.min.js" ></script>
+  <script>
+    (function (window, document) {
+      var typing = Fluid.plugins.typing;
+      var subtitle = document.getElementById('subtitle');
+      if (!subtitle || !typing) {
+        return;
+      }
+      var text = subtitle.getAttribute('data-typed-text');
+      
+        typing(text);
+      
+    })(window, document);
+  </script>
+
+
+
+
+  
+    <script  src="/js/img-lazyload.js" ></script>
+  
+
+
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/tocbot/4.20.1/tocbot.min.js', function() {
+    var toc = jQuery('#toc');
+    if (toc.length === 0 || !window.tocbot) { return; }
+    var boardCtn = jQuery('#board-ctn');
+    var boardTop = boardCtn.offset().top;
+
+    window.tocbot.init(Object.assign({
+      tocSelector     : '#toc-body',
+      contentSelector : '.markdown-body',
+      linkClass       : 'tocbot-link',
+      activeLinkClass : 'tocbot-active-link',
+      listClass       : 'tocbot-list',
+      isCollapsedClass: 'tocbot-is-collapsed',
+      collapsibleClass: 'tocbot-is-collapsible',
+      scrollSmooth    : true,
+      includeTitleTags: true,
+      headingsOffset  : -boardTop,
+    }, CONFIG.toc));
+    if (toc.find('.toc-list-item').length > 0) {
+      toc.css('visibility', 'visible');
+    }
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('tocbot' in window) {
+        tocbot.refresh();
+        var toc = jQuery('#toc');
+        if (toc.length === 0 || !tocbot) {
+          return;
+        }
+        if (toc.find('.toc-list-item').length > 0) {
+          toc.css('visibility', 'visible');
+        }
+      }
+    });
+  });
+</script>
+
+
+  <script src=https://lib.baomitu.com/clipboard.js/2.0.11/clipboard.min.js></script>
+
+  <script>Fluid.plugins.codeWidget();</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/anchor-js/5.0.0/anchor.min.js', function() {
+    window.anchors.options = {
+      placement: CONFIG.anchorjs.placement,
+      visible  : CONFIG.anchorjs.visible
+    };
+    if (CONFIG.anchorjs.icon) {
+      window.anchors.options.icon = CONFIG.anchorjs.icon;
+    }
+    var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+    var res = [];
+    for (var item of el) {
+      res.push('.markdown-body > ' + item.trim());
+    }
+    if (CONFIG.anchorjs.placement === 'left') {
+      window.anchors.options.class = 'anchorjs-link-left';
+    }
+    window.anchors.add(res.join(', '));
+
+    Fluid.events.registerRefreshCallback(function() {
+      if ('anchors' in window) {
+        anchors.removeAll();
+        var el = (CONFIG.anchorjs.element || 'h1,h2,h3,h4,h5,h6').split(',');
+        var res = [];
+        for (var item of el) {
+          res.push('.markdown-body > ' + item.trim());
+        }
+        if (CONFIG.anchorjs.placement === 'left') {
+          anchors.options.class = 'anchorjs-link-left';
+        }
+        anchors.add(res.join(', '));
+      }
+    });
+  });
+</script>
+
+
+  
+<script>
+  Fluid.utils.createScript('https://lib.baomitu.com/fancybox/3.5.7/jquery.fancybox.min.js', function() {
+    Fluid.plugins.fancyBox();
+  });
+</script>
+
+
+  <script>Fluid.plugins.imageCaption();</script>
+
+  <script defer src="/js/leancloud.js" ></script>
+
+  <script  src="/js/local-search.js" ></script>
+
+
+
+
+  
+<script src="/js/language-toggle.js"></script>
+
+
+
+<!-- 主题的启动项，将它保持在最底部 -->
+<!-- the boot of the theme, keep it at the bottom -->
+<script  src="/js/boot.js" ></script>
+
+
+  
+
+  <noscript>
+    <div class="noscript-warning">Blog works best with JavaScript enabled</div>
+  </noscript>
+</body>
+</html>
