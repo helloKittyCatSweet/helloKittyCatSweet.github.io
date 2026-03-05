@@ -54,39 +54,28 @@
     return SUPPORTED.indexOf(lang) !== -1 ? lang : detectDefaultLanguage();
   }
 
-  function normalizePath(path) {
-    if (!path) {
-      return "/";
-    }
-    return path.endsWith("/") ? path : path + "/";
-  }
-
   function syncNavLanguage(current) {
-    var navLinks = document.querySelectorAll("#navbarSupportedContent .nav-link[href]");
+    var navLinks = document.querySelectorAll("#navbarSupportedContent a.nav-link[href]");
     var navMap = UI_TEXT[current].nav;
+    
     for (var i = 0; i < navLinks.length; i++) {
       var link = navLinks[i];
-      var href = link.getAttribute("href") || "";
-      if (!href || href.indexOf("javascript:") === 0 || href.indexOf("#") === 0) {
-        continue;
+      var href = link.getAttribute("href");
+      
+      if (!href) continue;
+      
+      // Normalize href to match our nav map keys
+      var normalized = href;
+      if (normalized && !normalized.endsWith("/") && !normalized.includes("#")) {
+        normalized = normalized + "/";
       }
-
-      var pathname = "";
-      try {
-        pathname = new URL(link.href, window.location.origin).pathname;
-      } catch (error) {
-        continue;
-      }
-      pathname = normalizePath(pathname);
-
-      var translated = navMap[pathname];
-      if (!translated) {
-        continue;
-      }
-
-      var textNode = link.querySelector("span");
-      if (textNode) {
-        textNode.textContent = translated;
+      
+      var translated = navMap[normalized];
+      if (translated) {
+        var span = link.querySelector("span");
+        if (span) {
+          span.textContent = translated;
+        }
       }
     }
   }
